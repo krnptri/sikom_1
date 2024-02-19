@@ -129,6 +129,7 @@ class BukuController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Buku::find($id)->delete();
+        return back()->with('success', 'Data berhasil di hapus');
     }
 }
