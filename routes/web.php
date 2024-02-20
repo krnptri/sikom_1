@@ -27,3 +27,4 @@ Route::post('/auth', [LoginController::class, 'auth'])->name('auth');
 //ROUTE CRUD BUKU
 Route::resource('buku', BukuController::class)->middleware('auth');
 Route::get('export_pdf_buku', [BukuController::class, 'export_pdf'])->name('export_pdf_buku');
+Route::get('/export_excel_buku', [BukuController::class, 'export_excel'])->name('export_excel_buku');
