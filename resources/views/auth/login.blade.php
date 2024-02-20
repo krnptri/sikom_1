@@ -23,7 +23,8 @@
                         <label>Email</label><input class="form-control" placeholder="Enter your email" type="text" value="info@spruko.com">
                     </div>
                     <div class="form-group">
-                        <label>Password</label> <input class="form-control" placeholder="Enter your password" type="password" value="sprukodemo">
+                        <label>Password</label> 
+                        <input class="form-control" placeholder="Enter your password" type="password" value="sprukodemo">
                     </div><button class="btn btn-primary btn-block">Sign In</button>
                 </form>
             </div>
