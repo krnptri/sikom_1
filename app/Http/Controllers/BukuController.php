@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Exception;
 use App\Models\Buku;
 use Illuminate\Http\Request;
+
 use Barryvdh\DomPDF\Facade\Pdf;
+use App\Exports\DataBukuExportView;
+use App\Imports\ImportDataBukuClass;
 use Maatwebsite\Excel\Facades\Excel;
 
 class BukuController extends Controller
@@ -166,5 +170,48 @@ class BukuController extends Controller
 
         //untuk mendowload
         return Excel::download($export, $filename . '.xlsx');
+    }
+
+    public function import_excel(Request $request)
+    {
+        //DECLARE REQUEST
+        $file = $request->file('file');
+
+        //VALIDATION FORM
+        $request->validate([
+            'file' => 'required|mimes:csv,xls,xlsx'
+        ]);
+
+        try {
+            if($file){
+                // IMPORT DATA
+                $import = new ImportDataBukuClass;
+                Excel::import($import, $file);
+
+                // SUCCESS
+                $notimportlist="";
+                if ($import->listgagal) {
+                    $notimportlist.="<hr> Not Register : <br> {$import->listgagal}";
+                }
+                return back()
+                ->with('success', 'Import Data berhasil,<br>
+                Size '.$file->getSize().', File extention '.$file->extension().',
+                Insert '.$import->insert.' data, Update '.$import->edit.' data,
+                Failed '.$import->gagal.' data, <br> '.$notimportlist.'');
+
+            } else {
+                // ERROR
+                return back()
+                ->withInput()
+                ->with('error','Gagal memproses!');
+            }
+
+		}
+		catch(Exception $e){
+			// ERROR
+			return back()
+            ->withInput()
+            ->with('error','Gagal memproses!');
+		}
     }
 }
