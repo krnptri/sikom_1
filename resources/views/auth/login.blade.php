@@ -1,5 +1,5 @@
 @extends('_template_auth.layout')
-
+<title>Login</title>
 @section('content')
 <div class="my-auto page page-h">
     <div class="main-signin-wrapper">

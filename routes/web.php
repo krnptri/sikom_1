@@ -1,9 +1,11 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BukuController;
 use App\Http\Controllers\LoginController;
-use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\PeminjamanController;
+use App\Http\Controllers\UlasanBukuController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +29,12 @@ Route::post('/auth', [LoginController::class, 'auth'])->name('auth');
 
 //ROUTE CRUD BUKU
 Route::resource('buku', BukuController::class)->middleware('auth');
-Route::get('export_pdf_buku', [BukuController::class, 'export_pdf'])->name('export_pdf_buku')->middleware('role:petugas, administrator');
+Route::get('export_pdf_buku', [BukuController::class, 'export_pdf'])->name('export_pdf_buku')->middleware('role:petugas, administrator, peminjam');
 Route::get('/export_excel_buku', [BukuController::class, 'export_excel'])->name('export_excel_buku');
 Route::post('/import_excel_buku', [BukuController::class, 'import_excel'])->name('import_excel_buku');
+
+// ROUTE CRUD PMINJAMAN
+Route::resource('peminjaman', PeminjamanController::class);
+
+// ROUTE CRUD ULASAN BUKU
+Route::resource( 'ulasan_buku', UlasanBukuController::class);

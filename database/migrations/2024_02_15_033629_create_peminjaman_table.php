@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignId('buku_id')->constrained('bukus');
             $table->date('tanggal_peminjaman');
             $table->date('tanggal_pengembalian');
-            $table->string('status_peinjaman');
+            $table->string('status_peminjaman');
             $table->timestamps();
         });
     }

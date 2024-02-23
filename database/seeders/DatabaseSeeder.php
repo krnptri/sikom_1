@@ -19,12 +19,12 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
 
          User::create([
-            'name' => 'petugas1',
-            'email' => 'petugas@gmail.com',
+            'name' => 'JAEHYUN',
+            'email' => 'jaehyun@gmail.com',
             'password' => Hash::make('12345'),
-            'nama_lengkap' => 'petugas_satu',
-            'alamat' => 'subang',
-            'role' => 'petugas',
+            'nama_lengkap' => 'jung_jaehyun',
+            'alamat' => 'korea',
+            'role' => 'administrator',
             'verifikasi' => 'sudah',
             'alamat' => 'subang'
          ]);
